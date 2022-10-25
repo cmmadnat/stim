@@ -30,7 +30,7 @@ jobs:
 
   upload_gcs:
     runs-on: ubuntu-latest
-    need: build
+    needs: build
 
     permissions:
       contents: 'read'
