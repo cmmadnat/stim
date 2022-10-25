@@ -22,22 +22,25 @@ jobs:
           node-version: ${{ matrix.node-version }}
       - run: npm ci
       - run: npm run build --if-present
+      - name: Upload artifact for deployment job
+        uses: actions/upload-artifact@v3
+        with:
+          name: node-app
+          path: .
 
   upload_gcs:
     runs-on: ubuntu-latest
+    need: build
 
     permissions:
       contents: 'read'
       id-token: 'write'
 
     steps:
-      - uses: actions/checkout@v3
-      - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v3
+      - name: Download artifact from build job
+        uses: actions/download-artifact@v3
         with:
-          node-version: ${{ matrix.node-version }}
-      - run: npm ci
-      - run: npm run build --if-present
+          name: node-app
       - id: 'auth'
         uses: 'google-github-actions/auth@v0'
         with:
