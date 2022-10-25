@@ -49,4 +49,4 @@ jobs:
       - name: 'Set up Cloud SDK'
         uses: 'google-github-actions/setup-gcloud@v0'
       - name: 'Upload Site'
-        run: 'gsutil rsync -d -r ./ gs://stim.it-spring.com
+        run: 'gsutil rsync -d -r ./ gs://stim.it-spring.com'
