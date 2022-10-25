@@ -24,6 +24,8 @@ jobs:
       - run: npm run build --if-present
 
   upload_gcs:
+    runs-on: ubuntu-latest
+
     permissions:
       contents: 'read'
       id-token: 'write'
